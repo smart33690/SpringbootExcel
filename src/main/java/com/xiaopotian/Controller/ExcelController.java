@@ -1,9 +1,14 @@
 package com.xiaopotian.Controller;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +24,9 @@ public class ExcelController {
         List<String> titles = new ArrayList();
         titles.add("项目阶段");
         titles.add("区域");
+        titles.add("公司");
+        titles.add("公司");
+        titles.add("公司");
         titles.add("公司");
         data.setTitles(titles);
 
@@ -37,4 +45,5 @@ public class ExcelController {
 
         ExportExcelUtils.exportExcel(response,"hello.xlsx",data);
     }
+
 }

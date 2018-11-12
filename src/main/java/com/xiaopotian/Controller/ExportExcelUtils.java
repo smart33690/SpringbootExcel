@@ -3,6 +3,8 @@ package com.xiaopotian.Controller;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.io.OutputStream;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.*;
@@ -32,10 +34,42 @@ public class ExportExcelUtils {
 
         XSSFWorkbook wb = new XSSFWorkbook();
         try {
-            String sheetName = data.getName();
+
+            CreationHelper createHelper = wb.getCreationHelper();
+            Sheet sheet2 = wb.createSheet("new sheet");
+            // 创建行
+            Row row = sheet2.createRow(0);
+            //给列赋值。
+            row.createCell(1).setCellValue(1.2);
+            row.createCell(2).setCellValue(
+                    createHelper.createRichTextString("This is a string"));
+            row.createCell(3).setCellValue(new Date());
+            CellStyle cellStyle = wb.createCellStyle();
+            cellStyle.setDataFormat(
+                    createHelper.createDataFormat().getFormat("m/d/yy h:mm"));
+            Row row1 = sheet2.createRow(1);
+
+            row1.createCell(1).setCellValue(1.2);
+            row1.createCell(2).setCellValue(
+                    createHelper.createRichTextString("This is a string"));
+            row1.createCell(3).setCellValue(new Date());
+            row1.createCell(3).setCellStyle(cellStyle);
+
+            Row row2 = sheet2.createRow(2);
+            row2.createCell(0).setCellValue(1.1);
+            row2.createCell(1).setCellValue(new Date());
+            row2.createCell(2).setCellValue(Calendar.getInstance());
+            row2.createCell(3).setCellValue("a string");
+            row2.createCell(4).setCellValue(true);
+            row2.createCell(5).setCellType(CellType.ERROR);
+
+
+//            String sheetName = data.getName();
+            String sheetName = "54564564";
             if (null == sheetName) {
                 sheetName = "Sheet1";
             }
+            //创建表头
             XSSFSheet sheet = wb.createSheet(sheetName);
             writeExcel(wb, sheet, data);
 
